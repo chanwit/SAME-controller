@@ -1,0 +1,7 @@
+domain: projectsame.io
+repo: controller.projectsame.io
+resources:
+- group: program
+  kind: SameRun
+  version: v1alpha1
+version: "2"

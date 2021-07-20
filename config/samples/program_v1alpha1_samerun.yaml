@@ -1,0 +1,25 @@
+
+---
+apiVersion: source.toolkit.fluxcd.io/v1beta1
+kind: GitRepository
+metadata:
+  name: same-system
+  namespace: same-system
+spec:
+  interval: 1m0s
+  ref:
+    branch: main
+  url: https://github.com/SAME-Project/example-kubeflow-TF2-Retrain-Flowers
+---
+apiVersion: program.projectsame.io/v1alpha1
+kind: SameRun
+metadata:
+  name: retrain-flower
+  namespace: same-system
+spec:
+  interval: 1m0s
+  path: ./
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: same-system

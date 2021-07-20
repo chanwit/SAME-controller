@@ -1,0 +1,9 @@
+kubectl config view --minify --raw > local_kubeconfig
+yq -i e '.clusters[0].cluster.server="https://kubernetes.default.svc:443"' local_kubeconfig
+kubectl create ns same-system
+kubectl create secret -n same-system generic kubeconfig --from-file=value=$PWD/local_kubeconfig
+#
+#  TESTING
+#  kubectl create ns flux-system
+#  kubectl create secret -n flux-system generic kubeconfig --from-file=value=$PWD/local_kubeconfig
+#  kubectl get secret -n flux-system kubeconfig -o yaml | yq e .data.value - | base64 -d

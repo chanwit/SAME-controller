@@ -1,0 +1,24 @@
+# permissions for end users to edit sameruns.
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: samerun-editor-role
+rules:
+- apiGroups:
+  - program.projectsame.io
+  resources:
+  - sameruns
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - program.projectsame.io
+  resources:
+  - sameruns/status
+  verbs:
+  - get

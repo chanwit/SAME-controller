@@ -1,0 +1,11 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: same-system
+resources:
+- https://github.com/fluxcd/source-controller/releases/download/v0.12.0/source-controller.crds.yaml
+- https://github.com/fluxcd/source-controller/releases/download/v0.12.0/source-controller.deployment.yaml
+- ../crd
+- ../rbac
+- ../rbac-source-role
+- ../manager
+# - namespace.yaml

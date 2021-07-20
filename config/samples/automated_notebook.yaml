@@ -1,0 +1,29 @@
+---
+apiVersion: source.toolkit.fluxcd.io/v1beta1
+kind: GitRepository
+metadata:
+  name: samples
+  namespace: same-system
+spec:
+  interval: 1m0s
+  ref:
+    branch: main
+  url: https://github.com/SAME-Project/samples
+---
+apiVersion: program.projectsame.io/v1alpha1
+kind: SameRun
+metadata:
+  name: automated-notebook
+  namespace: same-system
+spec:
+  interval: 1m0s
+  path: ./automated_notebook
+  prune: true
+  # preconditions: >-
+  #  kfpVersion() == "1.15" &&
+  #  sameVersion() == "0.50.0" &&
+  #  defaultStorageClass() == "RWX" &&
+  #  cloudProvider() == "azure"
+  sourceRef:
+    kind: GitRepository
+    name: samples
